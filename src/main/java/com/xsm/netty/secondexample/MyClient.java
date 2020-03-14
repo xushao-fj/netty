@@ -1,4 +1,4 @@
-package netty.secondexample;
+package com.xsm.netty.secondexample;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

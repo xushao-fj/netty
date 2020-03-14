@@ -1,4 +1,4 @@
-package netty.secondexample;
+package com.xsm.netty.secondexample;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

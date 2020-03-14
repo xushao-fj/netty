@@ -1,4 +1,4 @@
-package netty.thirdexample;
+package com.xsm.netty.thirdexample;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

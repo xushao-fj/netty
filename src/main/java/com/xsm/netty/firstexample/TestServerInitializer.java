@@ -1,4 +1,4 @@
-package netty.firstexample;
+package com.xsm.netty.firstexample;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
