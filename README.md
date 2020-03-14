@@ -5,3 +5,9 @@
 >- 主要看TestHttpServerHandler中复写父类的方法
 
 # netty的Socket编程详解 2020-03-14
+- netty能用来干嘛
+>- http开发
+>- socket相关开发
+>- 支持长连接开发
+
+- 基于socket编程
