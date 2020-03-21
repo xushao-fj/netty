@@ -13,9 +13,12 @@ import java.nio.channels.FileChannel;
 public class NioTest2 {
     public static void main(String[] args) throws Exception {
         FileInputStream fileInputStream = new FileInputStream("src/NioTest2.txt");
+        // 获取通道
         FileChannel fileChannel = fileInputStream.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(512);
+        // 写入数据
         fileChannel.read(byteBuffer);
+        // 读写转换
         byteBuffer.flip();
         while (byteBuffer.remaining() > 0){
             byte b = byteBuffer.get();
