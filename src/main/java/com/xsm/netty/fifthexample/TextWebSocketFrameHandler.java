@@ -22,6 +22,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
     }
 
+    /**
+     * 建立连接事件
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         // id, 每一个channel都有一个全局对应的id
@@ -29,6 +34,11 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
     }
 
+    /**
+     * 断开链接事件
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         System.out.println("handlerRemoved: " + ctx.channel().id().asLongText());
