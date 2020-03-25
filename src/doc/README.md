@@ -36,5 +36,7 @@ Java中的7种原生数据类型都有各自对应的Buffer类型, 如IntBuffer,
 3. 将数据从Channel读取到Buffer中  
 - 绝对方法与相对方法的含义:  
 1. 相对方法: limit值与position值会在操作时被考虑到  
-2. 绝对方法: 完全忽略掉limit值与position值
+2. 绝对方法: 完全忽略掉limit值与position值  
+# NIO堆外内存与零拷贝深入理解  
+- `DirectByteBuffer` 核心类
   
