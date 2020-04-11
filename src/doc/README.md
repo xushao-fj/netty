@@ -38,5 +38,33 @@ Java中的7种原生数据类型都有各自对应的Buffer类型, 如IntBuffer,
 1. 相对方法: limit值与position值会在操作时被考虑到  
 2. 绝对方法: 完全忽略掉limit值与position值  
 # NIO堆外内存与零拷贝深入理解  
-- `DirectByteBuffer` 核心类
+- `DirectByteBuffer` 核心类, 了解其和ByteBuffer的区别, DirectByteBuffer零拷贝的原理
+
+# java 网络编程
+- 传统网络编程
+服务端
+```java
+ServerSocket serverSocket = ...;
+serverSocket.bind(8899);
+while (true) {
+  serverSocket.accept();// 阻塞方法
+  new Thread(socket);
+  run(){
+    socket.getInputStream();
+    ...
+    ...
+    ...
+  }
+}
+```
+客户端
+```java
+Socket socket = new Socket("localhost", 8899);
+// 发起连接
+socket.connect();
+```
+`NioTest12` 开始讲NIO中的selector
+  
+
+
   
