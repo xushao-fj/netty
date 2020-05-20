@@ -64,7 +64,23 @@ Socket socket = new Socket("localhost", 8899);
 socket.connect();
 ```
 `NioTest12` 开始讲NIO中的selector
-  
+
+## 字符编码
+- ASCII (American Standard Code for Information Interchange 美国信息交换标准代码)
+7 bit来表示一个字符,共计可以表示128种字符.  
+- ISO-8859-1  
+8 bit表示一个字符,即用一个字节(byte)来表示一个字符, 共计可以表示256个字符  
+- gb2312  
+两个字节表示一个汉字.  
+- gbk  
+- gb18030 
+- big5(台湾编码)
+- unicode(最全字符编码方式)  采用两个字节来表示一个字符
+- UTF(Unicode Translation Format)  
+unicode是一种编码范式, 而UTF则是一种存储方式; utf-8是Unicode的实现方式之一.  
+UTF-8: 变长字节表示形式  
+一般来说, UTF-8会通过3个字节来表示一个中文.  
+BOM(Byte Order Mark)
 
 
   
