@@ -87,6 +87,16 @@ Netty整体架构是Reactor模式的完整体现.
 Scalable IO in Java: https://www.jianshu.com/p/6a6fbf62e2e4  
 #### Reactor模式的角色构成
 ![nio](./picture/reactor1.png)  
+执行流程:  
+1. 当应用向Initiation Dispatcher注册具体的事件处理器时, 应用会标识出事件处理器希望Initiation Dispatcher在某个事件发生时向其通知的该事件, 该事件与Handle关联.  
+2. Initiation Dispatcher会要求每个事件处理器向其传递内部的Handle. 该Handle向操作系统标识了事件处理器.  
+3. 当所有的事件处理器注册完毕后, 应用会调用handle_events方法来启动Initiation Dispatcher的事件循环. 这时, Initiation Dispatcher会将每个注册的事件管理器的Handle合并起来,
+并使用同步事件分离器等待这些事件的发生. 比如说, TCP协议层会使用select同步事件分离器的操作来等待客户端发送的数据到达连接的socketHandle上  
+4. 当与某个事件源对应的Handle变为ready状态时(如TCP socket变为等待读状态时), 同步事件分离器就会通知Initiation Dispatcher.  
+5. Initiation Dispatcher会触发事件处理器的回调方法, 从而响应这个处于ready状态的Handle. 当事件发生时, Initiation Dispatcher会将被事件源激活的Handle作为key来寻找并分发的事件处理器回调方法.  
+6. Initiation Dispatcher会回调事件处理器的handle_events回调方法来执行特定于应用的功能(开发者自己所编写的功能), 从而响应这个事件. 所发生的事件类型可以作为该方法内部使用来执行额外的特定于服务的分离与分发.  
+
+组件:   
 - 1 Handle(句柄或是描述符): 本质上表示一种资源, 是由操作系统提供的; 
 该资源用于表示一个个事件, 比如说文件描述符, 或是对网络编程中的Socket描述符. 
 事件即可以来自于外部, 也可以来自于内部; 外部事件比如说客户端的链接请求, 客户端发送过来的数据等; 内部事件比如说操作系统产生的定时器事件等. 它本质上就是一个文件描述符. Handle是事件产生的发源地.
@@ -100,6 +110,11 @@ Scalable IO in Java: https://www.jianshu.com/p/6a6fbf62e2e4
 - 5 Initiation Dispatcher(初始分发器): 实际上就是Reactor角色. 它本身定义了一些规范, 这些规范用于控制事件的调度方式, 同时又提供了进行事件处理器注册, 删除等设施.
 它本身是整个事件处理器的核心所在, Initiation Dispatcher会通过同步时间分离器来等待事件的发生. 一旦事件发生, Initiation Dispatcher首先会分离出每一个事件, 然后调用事件处理器, 
 最后调用相关的回调方法来处理这些事件.
+
+- 执行流程  
+Initiation Dispatcher在启动过程中会注册(register_handler())若干个 Event Handler(事件处理器), 每个事件处理器都会定义自己所感兴趣的事件是什么, 注册完毕之后,
+Initiation Dispatcher 的事件循环就会启动, 调用Synchronous Event Demultiplexer 的 select()方法(同步阻塞), 等待着事件的产生, 当有事件产生时, 
+就会返回给Initiation Dispatcher事件的集合, Initiation Dispatcher根据事件类型调用对应的Event Handler的 handle_event()方法.
 
 
   
